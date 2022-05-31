@@ -1,4 +1,4 @@
-# Note Manager
+# Project Manager App
 
 ## Project Description
 
