@@ -13,7 +13,7 @@ Currently, there are two pages, the index page and the project details page
 
 ![note in detail](./public/assets/details.png)
 
-## Try out this project on your machine'
+## Try out this project on your machine
 - Clone the project
 `git clone https://github.com/MikeyOnyedika/project-manager-app.git`
 - Install xampp if you don't already have mysql setup locally [download xampp here](https://xampp.org). Make sure to check the mysql server option when installing xampp
