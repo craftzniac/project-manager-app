@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/project_detail.css" />
+    <title>NoteTaker | Project Detail</title>
+</head>
+
+<body>
+    <header class="primary-header">
+        <nav>
+            <div id="project-title-container"></div>
+
+            <div>
+                <a href="#"><img src="./assets/user-image.png" id="user-logo-btn" /></a>
+                <a href="./index.html" id="all-projects-btn" class="btn normal-btn">My Projects</a>
+                <a id="delete-project-btn"><img class="svg svg-icon-lg" src="./assets/delete-btn.svg" /></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="boards-list-container">
+            <header class="section-header">
+                <div class="board-count-container">
+                    <h2>Boards</h2>
+                    <span id="board-count"></span>
+                </div>
+                <a href="#" id="add-board-btn" class="btn accent-btn">+ Add Board</a>
+            </header>
+
+            <div id="add-board-form-container" class="disappear">
+                <div id="add-board-form" action="#" method="POST">
+                    <div class="text-input-wrapper">
+                        <input id="new-board-text-input" type="text" name="nameEl" placeholder="Board title" />
+                        <p class="error-msg disappear">
+                            You have not entered any board name
+                        </p>
+                    </div>
+                    <input id="create-board-btn" type="submit" id="add-board-btn" value="Create Board" />
+                </div>
+            </div>
+
+            <div class="boards"></div>
+        </section>
+    </main>
+
+    <script src="./javascript/project_detail.js"></script>
+</body>
+
+</html>

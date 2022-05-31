@@ -1,0 +1,190 @@
+:root {
+    --clr-accent: #8FFFC7;
+    --clr-primary: #C78FFF;
+    --clr-secondary: #FFC78F;
+    --clr-white: #e7fff3;
+    --clr-milk-white: #e0e0e0;
+    --clr-dark: #3b2e4d;
+    --ff-regular: 'Poppins', sans-serif;
+    --little-padding: 0.5rem;
+
+    --clr-red: #ad1515;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--clr-primary);
+    font-family: var(--ff-regular);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-white);
+    padding-inline: 2rem;
+    padding-block: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--clr-dark);
+}
+
+
+p {
+    font-weight: 200;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+h5 {
+    color: var(--clr-secondary);
+    font-weight: 400;
+}
+
+span {
+    color: var(--clr-primary);
+}
+
+
+
+.disappear {
+    display: none;
+}
+
+#create-new-project-form {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.text-input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    
+}
+
+.error-msg{
+    color: var(--clr-red);
+    padding-inline: 0.5rem;
+}
+
+input {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    padding: var(--little-padding);
+    border-radius: 5px;
+    font-family: var(--ff-regular);
+    transition: all 300ms ease-in-out;
+}
+
+input[type='text'] {
+    
+}
+
+#project-submit-btn {
+    cursor: pointer;
+    align-self: start;
+}
+
+#project-submit-btn:hover{
+    background-color: var(--clr-milk-white);
+}
+
+.projects-container-wrapper {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+#add-project-btn {
+    border-radius: 5px;
+    background-color: var(--clr-accent);
+    color: var(--clr-dark);
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    align-self: end;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: all 300ms ease-in;
+}
+
+#add-project-btn:hover {
+    background-color: var(--clr-dark);
+    color: var(--clr-white);
+}
+
+
+.projects-container {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#projects{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.project {
+    background-color: var(--clr-white);
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--clr-primary);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: all 300ms ease-in-out;
+}
+
+.project:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.project-extra {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* for smaller screens */
+@media screen and (max-width: 500px) {
+
+    .projects-container-wrapper{
+        padding-inline: 0;
+    }
+
+    .project-container{
+        width: 100%;
+    }
+
+    .project-extra {
+        flex-direction: column;
+    }
+
+    #create-new-project-form {
+        flex-direction: column;
+    }
+
+
+
+    input[type='text'] {
+        width: calc(100% - var(--little-padding) * 2);
+    }
+}

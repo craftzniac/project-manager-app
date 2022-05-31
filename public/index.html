@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>NoteTaker | Organize Notes and Projects</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h1><a href="#">My Projects</a></h1>
+            <p>Hello, <a href="#">Mikey</a> </p>
+        </nav>
+    </header>
+
+    <main>
+        <div class="projects-container-wrapper">
+            <div class="projects-container">
+                <a id="add-project-btn"> + New Project</a>
+                <!-- for adding new project -->
+                <div id="add-project-form-container" class="disappear">
+                    <div id="create-new-project-form">
+                        <div class="text-input-wrapper">
+                            <input type="text" name="nameEl" placeholder="Enter Project name" id="new-project-name">
+                            <p class="error-msg disappear">You have not entered any project name</p>
+                        </div>
+                        <input type="button" value="Add project" id="project-submit-btn">
+                    </div>
+                </div>
+
+                <div id="projects"></div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="./javascript/index.js"></script>
+</body>
+
+</html>
