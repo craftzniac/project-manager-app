@@ -15,8 +15,8 @@ export default class Card {
 
      getCard(id) {
           return new Promise((resolve, reject) => {
-               const query = `SELECT * FROM card WHERE id = ${id}`;
-               this.#connection.query(query, (error, result) => {
+               const query = `SELECT * FROM card WHERE id = ?`;
+               this.#connection.query(query, [id],  (error, result) => {
                     if (!error) {
                          resolve(result[0]);
                     } else {
@@ -28,8 +28,8 @@ export default class Card {
 
      addCard(id, boardId, description) {
           return new Promise((resolve, reject) => {
-               let query = `INSERT INTO card (id, board_id, description) VALUES ('${id}', '${boardId}', '${description}')`;
-               this.#connection.query(query, async (error, result) => {
+               let query = `INSERT INTO card (id, board_id, description) VALUES (?, ?, ?)`;
+               this.#connection.query(query, [id , boardId, description ],  async (error, result) => {
                     if (!error) {
                          const newCard = await this.getCard(id);
                          resolve(newCard);
@@ -42,8 +42,8 @@ export default class Card {
 
      editCard(id, isCompleted, description) {
           return new Promise((resolve, reject) => {
-               let query = `UPDATE card SET is_completed = ${isCompleted}, description = '${description}' WHERE id = '${id}'`;
-               this.#connection.query(query, async (error, result) => {
+               let query = `UPDATE card SET is_completed = ?, description = ? WHERE id = ?`;
+               this.#connection.query(query, [ isCompleted, description, id ] , async (error, result) => {
                     if (!error) {
                          const modifiedCard = await this.getCard(id);
                          resolve(modifiedCard);
@@ -57,8 +57,8 @@ export default class Card {
 
      deleteCard(id) {
           return new Promise((resolve, reject) => {
-               const query = `DELETE FROM card WHERE id = ${id}`;
-               this.#connection.query(query, (error, result) => {
+               const query = `DELETE FROM card WHERE id = ?`;
+               this.#connection.query(query, [id], (error, result) => {
                     if (!error) {
                          resolve(this.SUCCESS);
                     } else {

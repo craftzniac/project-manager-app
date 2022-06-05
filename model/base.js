@@ -2,11 +2,19 @@ import mysql from "mysql";
 import dotenv from "dotenv";
 dotenv.config();
 
-
 class BaseDb {
      #connection;
 
      constructor() {
+          if (
+               process.env.DB_NAME == null ||
+               process.env.DB_USER == null ||
+               process.env.DB_USER_PASSWORD == null
+          ) {
+               throw new Error(
+                    "You have not created a .env file in your project root or maybe you have not declared 'DB_NAME' or 'DB_USER' or 'DB_USER_PASSWORD' in the .env file"
+               );
+          }
           this.#connection = mysql.createConnection({
                host: "localhost",
                user: process.env.DB_USER,
@@ -68,8 +76,8 @@ class BaseDb {
 
      getProjectBoards(projectId) {
           return new Promise((resolve, reject) => {
-               const query = `SELECT * FROM board WHERE project_id = ${projectId}`;
-               this.#connection.query(query, (error, result) => {
+               const query = `SELECT * FROM board WHERE project_id = ?`;
+               this.#connection.query(query, [projectId], (error, result) => {
                     if (!error) {
                          resolve(result);
                     } else {
