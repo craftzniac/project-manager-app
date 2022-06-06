@@ -41,7 +41,8 @@ class BaseDb {
           const createBoardTable = {
                query: `CREATE TABLE IF NOT EXISTS board (id VARCHAR(20) PRIMARY KEY, 
                                                     title VARCHAR(300) NOT NULL,
-                                                    project_id VARCHAR(20) NOT NULL
+                                                    project_id VARCHAR(20) NOT NULL,
+                                                    date_created DATE NOT NULL DEFAULT(CURRENT_DATE)
                                                 )`,
                tableName: "board",
           };
@@ -76,7 +77,7 @@ class BaseDb {
 
      getProjectBoards(projectId) {
           return new Promise((resolve, reject) => {
-               const query = `SELECT * FROM board WHERE project_id = ?`;
+               const query = `SELECT * FROM board WHERE project_id = ? ORDER BY date_created DESC`;
                this.#connection.query(query, [projectId], (error, result) => {
                     if (!error) {
                          resolve(result);

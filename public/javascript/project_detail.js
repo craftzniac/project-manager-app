@@ -1,6 +1,11 @@
 // get project id from the url
 const keyvalue = location.href.split("?")[1];
-const projectId = keyvalue.split("=")[1];
+let projectId = keyvalue.split("=")[1];
+
+// removes '#' if it appears at the end of the id string
+if (projectId.search("#") != -1) {
+     projectId = projectId.substring(0, projectId.length - 1);
+}
 
 const boardsEl = document.querySelector(".boards");
 const boardCountEl = document.getElementById("board-count");
@@ -18,6 +23,8 @@ const getProjectDetails = async () => {
                     body: JSON.stringify({ projectId }),
                })
           ).json();
+
+          console.log(project);
 
           // set project-title and date elements
           const titleContainer = document.getElementById(
@@ -44,7 +51,8 @@ const getProjectDetails = async () => {
 
                if (board.cards.length > 0) {
                     const cards = board.cards;
-                    const cardsContainer = document.querySelector(".cards");
+                    const boardEl = document.querySelector(`#b-${board.id}`);
+                    const cardsContainer = boardEl.querySelector(".cards");
                     for (let card of cards) {
                          const cardEl = createCardEl(card);
                          cardsContainer.append(cardEl);
@@ -411,7 +419,7 @@ const setupEventListenersForEachCard = (board) => {
 };
 
 function strikeThroughCompletedCard(card, cardDescriptionEl) {
-     console.log(card);
+     // console.log(card);
      if (card.is_completed == 1) {
           cardDescriptionEl.style.textDecoration = "line-through";
      } else {
