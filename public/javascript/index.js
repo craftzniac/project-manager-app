@@ -1,3 +1,4 @@
+const baseUrl = "http://localhost:4000/api/v1";
 const projectsContainer = document.querySelector('#projects');
 
 // Asycn stuff. Fetching data for the page
@@ -7,7 +8,7 @@ const getProjects = async () => {
     projectsContainer.innerHTML = "";
 
     try {
-        const url = 'http://localhost:3000/api/v1/project';
+        const url = `${baseUrl}/project`;
 
         const projectList = await (await fetch(url)).json();
         console.log(projectList)
@@ -68,7 +69,7 @@ const setupDOMInteraction = () => {
 
             // add new project to the database  
             try {
-                const project =  await (await fetch('http://localhost:3000/api/v1/project', {
+                const project =  await (await fetch(`${baseUrl}/project`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

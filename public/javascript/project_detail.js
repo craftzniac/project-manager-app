@@ -1,3 +1,5 @@
+const baseUrl = "http://localhost:4000/api/v1";
+
 // get project id from the url
 const keyvalue = location.href.split("?")[1];
 let projectId = keyvalue.split("=")[1];
@@ -14,7 +16,7 @@ const boardCountEl = document.getElementById("board-count");
 const getProjectDetails = async () => {
      try {
           const project = await (
-               await fetch("http://localhost:3000/api/v1/project/id", {
+               await fetch(`${baseUrl}/project/id`, {
                     method: "POST",
                     headers: {
                          Accept: "application/json",
@@ -129,7 +131,7 @@ const setupDOMInteraction = () => {
      // delete project from database
      deleteBtn.addEventListener("click", async function () {
           const message = await (
-               await fetch("http://localhost:3000/api/v1/project", {
+               await fetch(`${baseUrl}/project`, {
                     method: "DELETE",
                     headers: {
                          Accept: "application/json",
@@ -153,23 +155,17 @@ const setupDOMInteraction = () => {
                // add new board to the database
                try {
                     const { board, projectBoardCount } = await (
-                         await fetch(
-                              "http://localhost:3000/api/v1/project/board",
-                              {
-                                   method: "POST",
-                                   headers: {
-                                        Accept: "application/json",
-                                        "Content-Type": "application/json",
-                                   },
-                                   body: JSON.stringify({
-                                        boardName: newBoardInputEl.value,
-                                        projectId: projectId.replaceAll(
-                                             "#",
-                                             ""
-                                        ),
-                                   }),
-                              }
-                         )
+                         await fetch(`${baseUrl}/project/board`, {
+                              method: "POST",
+                              headers: {
+                                   Accept: "application/json",
+                                   "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                   boardName: newBoardInputEl.value,
+                                   projectId: projectId.replaceAll("#", ""),
+                              }),
+                         })
                     ).json();
 
                     newBoardInputEl.value = "";
@@ -221,7 +217,7 @@ const setupEventListenersForEachBoard = (boardsEl) => {
 
           deleteBtn.addEventListener("click", async () => {
                const result = await (
-                    await fetch("http://localhost:3000/api/v1/project/board", {
+                    await fetch(`${baseUrl}/project/board`, {
                          method: "DELETE",
                          headers: {
                               Accept: "application/json",
@@ -248,24 +244,18 @@ const setupEventListenersForEachBoard = (boardsEl) => {
 
                try {
                     const { oldTitle, newTitle } = await (
-                         await fetch(
-                              "http://localhost:3000/api/v1/project/board",
-                              {
-                                   method: "PUT",
-                                   headers: {
-                                        Accept: "application/json",
-                                        "Content-Type": "application/json",
-                                   },
-                                   body: JSON.stringify({
-                                        boardId: board.id.split("-")[1],
-                                        newTitle: boardTitleEl.textContent,
-                                        projectId: projectId.replaceAll(
-                                             "#",
-                                             ""
-                                        ),
-                                   }),
-                              }
-                         )
+                         await fetch(`${baseUrl}/project/board`, {
+                              method: "PUT",
+                              headers: {
+                                   Accept: "application/json",
+                                   "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                   boardId: board.id.split("-")[1],
+                                   newTitle: boardTitleEl.textContent,
+                                   projectId: projectId.replaceAll("#", ""),
+                              }),
+                         })
                     ).json();
 
                     boardTitleEl.textContent = newTitle;
@@ -283,20 +273,17 @@ const setupEventListenersForEachBoard = (boardsEl) => {
                const cardData = newCardTextEl.value;
                if (cardData != "") {
                     const newCard = await (
-                         await fetch(
-                              "http://localhost:3000/api/v1/project/board/card",
-                              {
-                                   method: "POST",
-                                   headers: {
-                                        Accept: "application/json",
-                                        "Content-Type": "application/json",
-                                   },
-                                   body: JSON.stringify({
-                                        boardId: board.id.split("-")[1],
-                                        description: cardData,
-                                   }),
-                              }
-                         )
+                         await fetch(`${baseUrl}/project/board/card`, {
+                              method: "POST",
+                              headers: {
+                                   Accept: "application/json",
+                                   "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                   boardId: board.id.split("-")[1],
+                                   description: cardData,
+                              }),
+                         })
                     ).json();
 
                     console.log(newCard);
@@ -333,21 +320,18 @@ const setupEventListenersForEachCard = (board) => {
                descriptionEl.classList.remove("highlight");
                try {
                     const modified = await (
-                         await fetch(
-                              "http://localhost:3000/api/v1/project/board/card",
-                              {
-                                   method: "PUT",
-                                   headers: {
-                                        Accept: "application/json",
-                                        "Content-Type": "application/json",
-                                   },
-                                   body: JSON.stringify({
-                                        id: card.id.split("-")[1],
-                                        isCompleted: checkBox.checked,
-                                        description: descriptionEl.textContent,
-                                   }),
-                              }
-                         )
+                         await fetch(`${baseUrl}/project/board/card`, {
+                              method: "PUT",
+                              headers: {
+                                   Accept: "application/json",
+                                   "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                   id: card.id.split("-")[1],
+                                   isCompleted: checkBox.checked,
+                                   description: descriptionEl.textContent,
+                              }),
+                         })
                     ).json();
 
                     descriptionEl.textContent = modified.description;
@@ -360,21 +344,18 @@ const setupEventListenersForEachCard = (board) => {
           checkBox.addEventListener("change", async () => {
                try {
                     const modified = await (
-                         await fetch(
-                              "http://localhost:3000/api/v1/project/board/card",
-                              {
-                                   method: "PUT",
-                                   headers: {
-                                        Accept: "application/json",
-                                        "Content-Type": "application/json",
-                                   },
-                                   body: JSON.stringify({
-                                        id: card.id.split("-")[1],
-                                        isCompleted: checkBox.checked,
-                                        description: descriptionEl.textContent,
-                                   }),
-                              }
-                         )
+                         await fetch(`${baseUrl}/project/board/card`, {
+                              method: "PUT",
+                              headers: {
+                                   Accept: "application/json",
+                                   "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                   id: card.id.split("-")[1],
+                                   isCompleted: checkBox.checked,
+                                   description: descriptionEl.textContent,
+                              }),
+                         })
                     ).json();
 
                     descriptionEl.textContent = modified.description;
@@ -392,19 +373,16 @@ const setupEventListenersForEachCard = (board) => {
           deleteBtn.addEventListener("click", async () => {
                try {
                     const result = await (
-                         await fetch(
-                              "http://localhost:3000/api/v1/project/board/card",
-                              {
-                                   method: "DELETE",
-                                   headers: {
-                                        Accept: "application/json",
-                                        "Content-Type": "application/json",
-                                   },
-                                   body: JSON.stringify({
-                                        id: card.id.split("-")[1],
-                                   }),
-                              }
-                         )
+                         await fetch(`${baseUrl}/project/board/card`, {
+                              method: "DELETE",
+                              headers: {
+                                   Accept: "application/json",
+                                   "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                   id: card.id.split("-")[1],
+                              }),
+                         })
                     ).json();
 
                     console.log(result);
