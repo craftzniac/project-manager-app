@@ -166,25 +166,5 @@ input[type='text'] {
 /* for smaller screens */
 @media screen and (max-width: 500px) {
 
-    .projects-container-wrapper{
-        padding-inline: 0;
-    }
-
-    .project-container{
-        width: 100%;
-    }
-
-    .project-extra {
-        flex-direction: column;
-    }
-
-    #create-new-project-form {
-        flex-direction: column;
-    }
-
-
-
-    input[type='text'] {
-        width: calc(100% - var(--little-padding) * 2);
-    }
+  
 }

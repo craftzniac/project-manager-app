@@ -8,7 +8,7 @@ const getProjects = async () => {
     projectsContainer.innerHTML = "";
 
     try {
-        const url = `${baseUrl}/project`;
+        const url = `${baseUrl}/projects`;
 
         const projectList = await (await fetch(url)).json();
         console.log(projectList)
@@ -69,7 +69,7 @@ const setupDOMInteraction = () => {
 
             // add new project to the database  
             try {
-                const project =  await (await fetch(`${baseUrl}/project`, {
+                const project =  await (await fetch(`${baseUrl}/projects/`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

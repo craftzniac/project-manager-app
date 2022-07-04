@@ -16,14 +16,7 @@ const boardCountEl = document.getElementById("board-count");
 const getProjectDetails = async () => {
      try {
           const project = await (
-               await fetch(`${baseUrl}/project/id`, {
-                    method: "POST",
-                    headers: {
-                         Accept: "application/json",
-                         "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ projectId }),
-               })
+               await fetch(`${baseUrl}/projects/${projectId}`)
           ).json();
 
           console.log(project);
@@ -131,7 +124,7 @@ const setupDOMInteraction = () => {
      // delete project from database
      deleteBtn.addEventListener("click", async function () {
           const message = await (
-               await fetch(`${baseUrl}/project`, {
+               await fetch(`${baseUrl}/projects/`, {
                     method: "DELETE",
                     headers: {
                          Accept: "application/json",

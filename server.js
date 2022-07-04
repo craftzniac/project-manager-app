@@ -12,7 +12,8 @@ app.get("/", (req, res) => {
      res.redirect("/api/v1/project");
 });
 
-app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/projects/", projectRouter);
+
 app.use("/api/v1/project/board", boardRouter);
 app.use("/api/v1/project/board/card", cardRouter);
 
